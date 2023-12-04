@@ -1,0 +1,28 @@
+header {
+  width: 850px;
+  text-align: center;
+  background: rgb(238, 210, 174);
+  background: radial-gradient(
+    circle,
+    rgba(238, 210, 174, 1) 0%,
+    rgba(148, 212, 233, 1) 100%
+  );
+  margin: 0 auto;
+  padding: 20px 0;
+  border-radius: 5px;
+  text-shadow: #fc0 1px 0 10px;
+}
+
+main {
+    width: 850px;
+    margin: 0 auto;
+    padding: 40px 0;
+}
+
+.request-list {
+    background-color: #94d4e9;
+}
+
+.answer-list {
+    background-color: #fc0;
+}
