@@ -11,82 +11,176 @@
       <h1>DB QUERY - UNIVERSITY</h1>
     </header>
     <main>
-      <ol>
-        <li class="answer-list">
-          <p class="request-list">
-            Selezionare tutti gli studenti nati nel 1990 (160)
-          </p>
-          SELECT *
-          <br />
-          FROM `students`
-          <br />
-          WHERE `date_of_birth` LIKE '1990-%';
-        </li>
-        <li class="answer-list">
-          <p class="request-list">
-            Selezionare tutti i corsi che valgono più di 10 crediti (479)
-          </p>
-          SELECT *
-          <br />
-          FROM `courses`
-          <br />
-          WHERE `cfu` > 10;
-        </li>
-        <li class="answer-list">
-          <p class="request-list">
-            Selezionare tutti gli studenti che hanno più di 30 anni
-          </p>
-          SELECT TIMESTAMPDIFF(YEAR, DATE(`date_of_birth`), CURDATE())
-          <br>
-           FROM `students` 
-           <br>
-           WHERE TIMESTAMPDIFF(YEAR, DATE(`date_of_birth`), CURDATE()) > 30;
-        </li>
-        <li class="answer-list">
-          <p class="request-list">
-            Selezionare tutti i corsi del primo semestre del primo anno di un
-            qualsiasi corso di laurea (286)
-          </p>
-          SELECT *
-          <br />
-          FROM `courses`
-          <br />
-          WHERE `year` = 1 `period` LIKE 'I semestre';
-        </li>
-        <li class="answer-list">
-          <p class="request-list">
-            Selezionare tutti gli appelli d'esame che avvengono nel pomeriggio
-            (dopo le 14) del 20/06/2020 (21)
-          </p>
-          SELECT * FROM `exams`
-          <br />
-          WHERE `date` = '2020-06-20' AND `hour` >= '14:00:00';
-        </li>
-        <li class="answer-list">
-          <p class="request-list">
-            Selezionare tutti i corsi di laurea magistrale (38)
-          </p>
-          SELECT *
-          <br />
-          FROM `degrees` WHERE `level` = 'magistrale';
-        </li>
-        <li class="answer-list">
-          <p class="request-list">
-            Da quanti dipartimenti è composta l'università? (12)
-          </p>
-          SELECT COUNT(*) as `numero_di_dipartimenti`
-          <br />
-          FROM `departments`;
-        </li>
-        <li class="answer-list">
-          <p class="request-list">
-            Quanti sono gli insegnanti che non hanno un numero di telefono? (50)
-          </p>
-          SELECT COUNT(*) as `numero_insegnanti_senza_numero`
-          <br />
-          FROM `teachers` WHERE `phone` IS NULL;
-        </li>
-      </ol>
+      <!-- <section>
+        <ol>
+            <li class="answer-list">
+              <p class="request-list">
+                Selezionare tutti gli studenti nati nel 1990 (160)
+              </p>
+              SELECT *
+              <br />
+              FROM `students`
+              <br />
+              WHERE `date_of_birth` LIKE '1990-%';
+            </li>
+            <li class="answer-list">
+              <p class="request-list">
+                Selezionare tutti i corsi che valgono più di 10 crediti (479)
+              </p>
+              SELECT *
+              <br />
+              FROM `courses`
+              <br />
+              WHERE `cfu` > 10;
+            </li>
+            <li class="answer-list">
+              <p class="request-list">
+                Selezionare tutti gli studenti che hanno più di 30 anni
+              </p>
+              SELECT TIMESTAMPDIFF(YEAR, DATE(`date_of_birth`), CURDATE())
+              <br>
+               FROM `students` 
+               <br>
+               WHERE TIMESTAMPDIFF(YEAR, DATE(`date_of_birth`), CURDATE()) > 30;
+            </li>
+            <li class="answer-list">
+              <p class="request-list">
+                Selezionare tutti i corsi del primo semestre del primo anno di un
+                qualsiasi corso di laurea (286)
+              </p>
+              SELECT *
+              <br />
+              FROM `courses`
+              <br />
+              WHERE `year` = 1 `period` LIKE 'I semestre';
+            </li>
+            <li class="answer-list">
+              <p class="request-list">
+                Selezionare tutti gli appelli d'esame che avvengono nel pomeriggio
+                (dopo le 14) del 20/06/2020 (21)
+              </p>
+              SELECT * FROM `exams`
+              <br />
+              WHERE `date` = '2020-06-20' AND `hour` >= '14:00:00';
+            </li>
+            <li class="answer-list">
+              <p class="request-list">
+                Selezionare tutti i corsi di laurea magistrale (38)
+              </p>
+              SELECT *
+              <br />
+              FROM `degrees` WHERE `level` = 'magistrale';
+            </li>
+            <li class="answer-list">
+              <p class="request-list">
+                Da quanti dipartimenti è composta l'università? (12)
+              </p>
+              SELECT COUNT(*) as `numero_di_dipartimenti`
+              <br />
+              FROM `departments`;
+            </li>
+            <li class="answer-list">
+              <p class="request-list">
+                Quanti sono gli insegnanti che non hanno un numero di telefono? (50)
+              </p>
+              SELECT COUNT(*) as `numero_insegnanti_senza_numero`
+              <br />
+              FROM `teachers` WHERE `phone` IS NULL;
+            </li>
+        </ol>
+     </section> -->
+      <section>
+        <ol>
+          <li class="answer-list">
+            <p>
+              Selezionare tutti gli studenti iscritti al Corso di Laurea in
+              Economia
+            </p>
+            <p class="request-list">
+              SELECT `degrees`.`name` AS `degree_name`, `students`.*
+              <br />
+              FROM `degrees`
+              <br />
+              INNER JOIN `students` ON `degrees`.`id` = `students`.`degree_id`
+              <br />
+              WHERE `degrees`.`name` = 'Corso di Laurea in Economia';
+            </p>
+          </li>
+          <li class="answer-list">
+            <p>
+              Selezionare tutti i Corsi di Laurea Magistrale del Dipartimento di
+              Neuroscienze
+            </p>
+            <p class="request-list">
+              SELECT *
+              <br />
+              FROM `departments`
+              <br />
+              INNER JOIN `degrees` ON `departments`.`id` =
+              `degrees`.`department_id`
+              <br />
+              WHERE `departments`.`name` = 'Dipartimento di Neuroscienze' AND
+              `degrees`.`level` = 'magistrale';
+            </p>
+          </li>
+          <li class="answer-list">
+            <p>Selezionare tutti i corsi in cui insegna Fulvio Amato (id=44)</p>
+            <p class="request-list">SELECT `course_id` AS `course_id`, `courses`.`name` AS `course_name`, `teachers`.`name` AS `teacher_name`, `teachers`.`surname` AS `teacher_surname`
+                <br>
+                FROM `courses`
+                <br>
+                INNER JOIN `course_teacher` ON `courses`.`id` = `course_teacher`.`course_id`
+                <br>
+                INNER JOIN `teachers` ON `teachers`.`id` = `course_teacher`.`teacher_id`
+                <br>
+                WHERE `teacher_id` = 44;</p>
+          </li>
+          <li class="answer-list">
+            <p>Selezionare tutti gli studenti con i dati relativi al corso di laurea a cui
+                sono iscritti e il relativo dipartimento, in ordine alfabetico per cognome e
+                nome
+            </p>
+            <p class="request-list">SELECT CONCAT(`students`.`surname`, ' ', `students`.`name`) AS `student_fullname`, `departments`.`name` AS `department_name`, `degrees`.*
+                <br>
+                FROM `students`
+                <br>
+                INNER JOIN `degrees` ON `degrees`.`id` = `students`.`degree_id`
+                <br>
+                INNER JOIN `departments` ON `departments`.`id` = `degrees`.`department_id`
+                <br>
+                ORDER BY `student_fullname`;</p>
+          </li>
+          <li class="answer-list">
+            <p>Selezionare tutti i corsi di laurea con i relativi corsi e insegnanti</p>
+            <p class="request-list">SELECT `degrees`.`name` AS `degree_name`, `courses`.`name` AS `course_name`, `teachers`.`name` AS `teacher_name`
+                <br>
+                FROM `degrees`
+                <br>
+                INNER JOIN `courses` ON `degrees`.`id` = `courses`.`degree_id`
+                <br>
+                INNER JOIN `course_teacher` ON `courses`.`id` = `course_teacher`.`course_id`
+                <br>
+                INNER JOIN `teachers` ON `course_teacher`.`teacher_id` = `teachers`.`id`;
+            </p>
+          </li>
+          <li class="answer-list">
+            <p> Selezionare tutti i docenti che insegnano nel Dipartimento di Matematica (54)</p>
+            <p class="request-list">SELECT `departments`.`id` AS `department_id`, `departments`.`name` AS `department_name`, `teachers`.`id` AS `teacher_id`, CONCAT(`teachers`.`surname`, ' ', `teachers`.`name`) AS `teacher_fullname`
+                <br>
+                FROM `teachers`
+                <br>
+                INNER JOIN `course_teacher` ON `teachers`.`id` = `course_teacher`.`teacher_id`
+                <br>
+                INNER JOIN `courses` ON `courses`.`id` = `course_teacher`.`course_id`
+                <br>
+                INNER JOIN `degrees` ON `degrees`.`id` = `courses`.`degree_id`
+                <br>
+                INNER JOIN `departments` ON `departments`.`id` = `degrees`.`department_id`
+                <br>
+                WHERE `departments`.`name` = 'Dipartimento di Matematica';</p>
+          </li>
+        </ol>
+      </section>
     </main>
   </body>
 </html>
