@@ -90,6 +90,7 @@
         </ol>
      </section> -->
       <section>
+        <h1>Query with JOIN</h1>
         <ol>
           <li class="answer-list">
             <p>
@@ -179,6 +180,49 @@
                 <br>
                 WHERE `departments`.`name` = 'Dipartimento di Matematica';</p>
           </li>
+        </ol>
+      </section>
+      <section>
+        <h1>Query with GROUP BY </h1>
+        <ol>
+            <li class="answer-list">
+                <p>Contare quanti iscritti ci sono stati ogni anno</p>
+                <p class="request-list">SELECT COUNT(*) AS `student_number`, YEAR(`students`.`enrolment_date`) AS `year`
+                    <br>
+                    FROM `students`
+                    <br>
+                    GROUP BY YEAR(`students`.`enrolment_date`);</p>
+            </li>
+            <li class="answer-list">
+                <p>Contare gli insegnanti che hanno l'ufficio nello stesso edificio</p>
+                <p class="request-list">SELECT COUNT(*) AS `teachers_number`, `teachers`.`office_address` 
+                    <br>
+                    FROM `teachers` 
+                    <br>
+                    GROUP BY `teachers`.`office_address`;</p>
+            </li>
+            <li class="answer-list">
+                <p>Calcolare la media dei voti di ogni appello d'esame</p>
+                <p class="request-list">SELECT COUNT(*) AS `exam_id`, AVG(`exam_student`.`vote`) AS `avg`
+                    <br>
+                    FROM `exam_student`
+                    <br>
+                    INNER JOIN `exams` ON `exam_student`.`exam_id` = `exams`.`id`
+                    <br>
+                    GROUP BY `exams`.`id`;</p>
+            </li>
+            <li class="answer-list">
+                <p>Contare quanti corsi di laurea ci sono per ogni dipartimento</p>
+                <p class="request-list">SELECT COUNT(*) AS `courses_number`, `departments`.`name`
+                    <br>
+                    FROM `courses`
+                    <br>
+                    INNER JOIN `degrees` ON `courses`.`degree_id` = `degrees`.`id`
+                    <br>
+                    INNER JOIN `departments` ON `departments`.`id` = `degrees`.`department_id`
+                    <br>
+                    GROUP BY `departments`.`id`;</p>
+            </li>
         </ol>
       </section>
     </main>
