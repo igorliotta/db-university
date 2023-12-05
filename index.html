@@ -213,11 +213,9 @@
             </li>
             <li class="answer-list">
                 <p>Contare quanti corsi di laurea ci sono per ogni dipartimento</p>
-                <p class="request-list">SELECT COUNT(*) AS `courses_number`, `departments`.`name`
+                <p class="request-list">SELECT COUNT(*) AS `degrees_number`, `departments`.`name`
                     <br>
-                    FROM `courses`
-                    <br>
-                    INNER JOIN `degrees` ON `courses`.`degree_id` = `degrees`.`id`
+                    FROM `degrees`
                     <br>
                     INNER JOIN `departments` ON `departments`.`id` = `degrees`.`department_id`
                     <br>
