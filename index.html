@@ -166,7 +166,7 @@
           </li>
           <li class="answer-list">
             <p> Selezionare tutti i docenti che insegnano nel Dipartimento di Matematica (54)</p>
-            <p class="request-list">SELECT `departments`.`id` AS `department_id`, `departments`.`name` AS `department_name`, `teachers`.`id` AS `teacher_id`, CONCAT(`teachers`.`surname`, ' ', `teachers`.`name`) AS `teacher_fullname`
+            <p class="request-list">SELECT DISTINCT `departments`.`id` AS `department_id`, `departments`.`name` AS `department_name`, `teachers`.`id` AS `teacher_id`, CONCAT(`teachers`.`surname`, ' ', `teachers`.`name`) AS `teacher_fullname`
                 <br>
                 FROM `teachers`
                 <br>
